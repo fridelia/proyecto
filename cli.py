@@ -1,6 +1,7 @@
 # poner un def, para acortar codigo..regresar a input de archivo, o menú general
 import os #checar equivalente
 import platform
+import shutil
 from pathlib import Path
 
 #Variables utilizadas en todos los ciclos y funciones
@@ -48,6 +49,11 @@ def editar():
         with open(path_file, 'a') as file:
             file.write(nuevo_tex)
 
+#Función eliminar
+def eliminar():
+    path_file = path / eleccionEliminar
+    path_file.unlink()
+
 
 #Menú principal
 cicloMenu1 = True
@@ -56,8 +62,9 @@ while cicloMenu1:
     print("1. Listar archivos")
     print("2. Leer archivo")
     print("3. Editar archivo")
-    print("4. Limpiar consola") #Se incorporó la sugerencia de añadir esta función de la asesoría #1 sobre un proyecto de este tipo.
-    print("5. Salir")
+    print("4. Eliminar archivo")
+    print("5. Limpiar consola") #Se incorporó la sugerencia de añadir esta función de la asesoría #1 sobre un proyecto de este tipo.
+    print("6. Salir")
 
 
     opcionMenu = input("Ingrese una opción con número: ") #validar que sea número
@@ -106,13 +113,20 @@ while cicloMenu1:
             else:
                 print("Selecciona solo números del 1 al 3, intenta de nuevo\n")
 
+
     elif opcionMenu == "4":
+        print("Ingrese el archivo que desea eliminar")
+        listar()
+        eleccionEliminar = input("\nsu elección: ")
+        eliminar()
+
+    elif opcionMenu == "5":
         if platform.system() == "Windows":
             os.system("cls")
         else:
             os.system("clear")
 
-    elif opcionMenu == "5":
+    elif opcionMenu == "6":
         cicloMenu1 = False  
 
     else:
