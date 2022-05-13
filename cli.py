@@ -10,7 +10,6 @@ path = Path(current_directory)
 
 ##Función para validar existencia de archivos (problema con esta función)
 def validar(ruta_archivo):
-    
     data = input(ruta_archivo)
     path_folder = path / data
     
@@ -31,13 +30,13 @@ def listar():
 
 #Función leer
 def leer():
-    path_file2 = path / eleccionLeer
-    if path_file2.exists():
+    #path_file2 = path / eleccionLeer
+    #if path_file2.exists():
         #print("ok)")
-        with open(path_file2, 'r') as file:
-            content = file.read()
+    with open(path_Leer, 'r') as file:
+        content = file.read()
         #content = path_file2.read_text()
-            print(content)
+        print(content)
 
 #Función Editar
 def editar():
@@ -52,7 +51,7 @@ def editar():
 #Función eliminar
 def eliminar():
     path_file = path / eleccionEliminar
-    path_file.unlink()
+    path_file.unlink
 
 
 #Menú principal
@@ -82,6 +81,7 @@ while cicloMenu1:
         while True:
             eleccionLeer = (input("\nsu elección: ")) #validar nombre
             if validar(eleccionLeer):
+                path_Leer = path / eleccionLeer
                 leer()
                 cicloValidar1 = False
             #if eleccionLeer.is_file():
