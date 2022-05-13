@@ -7,7 +7,7 @@ from pathlib import Path
 current_directory = Path.cwd()
 path = Path(current_directory) 
 
-#Función para validar existencia de archivos
+##Función para validar existencia de archivos (problema con esta función)
 def validar(ruta_archivo):
     
     data = input(ruta_archivo)
@@ -70,9 +70,7 @@ while cicloMenu1:
         mensajeLeer = "Elija el archivo que desea leer de la lista: "
         print(mensajeLeer)
         listar()
-        
-        
-        
+
         cicloValidar1 = True
         while True:
             eleccionLeer = (input("\nsu elección: ")) #validar nombre
