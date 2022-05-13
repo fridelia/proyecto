@@ -15,6 +15,7 @@ def validar(ruta_archivo):
     
     if path_folder.exists():
         return True
+        #print("ok")
     else:
         print('error, nombre incorrecto')
         return False
@@ -30,10 +31,10 @@ def listar():
 
 #Función leer
 def leer():
-    #path_file2 = path / eleccionLeer
+    path_file2 = path / eleccionLeer
     #if path_file2.exists():
         #print("ok)")
-    with open(path_Leer, 'r') as file:
+    with open(path_file2, 'r') as file:
         content = file.read()
         #content = path_file2.read_text()
         print(content)
@@ -76,21 +77,24 @@ while cicloMenu1:
         mensajeLeer = "Elija el archivo que desea leer de la lista: "
         print(mensajeLeer)
         listar()
-
+        eleccionLeer = input("\nsu elección: ")
+        
         cicloValidar1 = True
         while True:
-            eleccionLeer = (input("\nsu elección: ")) #validar nombre
+            
+            #validar nombre
             if validar(eleccionLeer):
-                path_Leer = path / eleccionLeer
-                leer()
+                #path_Leer = path / eleccionLeer
+                
                 cicloValidar1 = False
+                leer()
             #if eleccionLeer.is_file():
                 #print('se puede leer')
                 #cicloValidar1 = False
             else:
                 cicloValidar1 = False
                 #print('error, intenta de nuevo')
-            
+                #break
 
     elif opcionMenu == "3":
         print("Ingrese el archivo que desea editar")
