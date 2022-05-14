@@ -17,7 +17,7 @@ def validar(ruta_archivo):
         return True
         #print("ok")
     else:
-        print('error, nombre incorrecto')
+        print('Nombre incorrecto, intente de nuevo')
         return False
         #except ValueError:
         #   print("El dato ")
@@ -77,22 +77,28 @@ while cicloMenu1:
         mensajeLeer = "Elija el archivo que desea leer de la lista: "
         print(mensajeLeer)
         listar()
-        eleccionLeer = input("\nsu elección: ")
+        
         
         cicloValidar1 = True
-        while True:
-            
+        while cicloValidar1:
+            eleccionLeer = input("\nsu elección: ") #los espacios los acepta pero repite el bucle de preguntar el nombre del archivo
+            if eleccionLeer == '' or ' ':
+                print('No se detectó nombre del archivo, Asegúrese de escribirlo')
+            else:
+                validar(eleccionLeer)
+
             #validar nombre
-            if validar(eleccionLeer):
+            if eleccionLeer == True:
                 #path_Leer = path / eleccionLeer
-                
-                cicloValidar1 = False
                 leer()
+                cicloValidar1 = False
+                
             #if eleccionLeer.is_file():
                 #print('se puede leer')
                 #cicloValidar1 = False
             else:
-                cicloValidar1 = False
+                #if eleccionLeer == False:
+                print('Error, intente de nuevo')
                 #print('error, intenta de nuevo')
                 #break
 
