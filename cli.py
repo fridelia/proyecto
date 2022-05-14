@@ -9,19 +9,18 @@ current_directory = Path.cwd()
 path = Path(current_directory) 
 
 ##Función para validar existencia de archivos (problema con esta función)
-def validar(ruta_archivo):
-    data = input(ruta_archivo)
+def validar(nombre_archivo):
+    data = input(nombre_archivo)
     path_folder = path / data
     
     if path_folder.exists():
+        print("ok")
         return True
-        #print("ok")
     else:
-        print('Nombre incorrecto, intente de nuevo')
+        #print('Nombre incorrecto, intente de nuevo')
         return False
         #except ValueError:
         #   print("El dato ")
-
 
 #Función Listar
 def listar():
@@ -74,33 +73,29 @@ while cicloMenu1:
         listar()
 
     elif opcionMenu == "2":
-        mensajeLeer = "Elija el archivo que desea leer de la lista: "
+        mensajeLeer = "\nElija el archivo que desea leer de la lista: "
         print(mensajeLeer)
         listar()
         
         
         cicloValidar1 = True
         while cicloValidar1:
-            eleccionLeer = input("\nsu elección: ") #los espacios los acepta pero repite el bucle de preguntar el nombre del archivo
-            if eleccionLeer == '' or ' ':
-                print('No se detectó nombre del archivo, Asegúrese de escribirlo')
-            else:
-                validar(eleccionLeer)
-
+            eleccionLeer = input("su elección: ") #los espacios los acepta pero repite el bucle de preguntar el nombre del archivo
+            #validar(eleccionLeer)
             #validar nombre
-            if eleccionLeer == True:
+            if validar(eleccionLeer): #== True:
                 #path_Leer = path / eleccionLeer
                 leer()
                 cicloValidar1 = False
-                
             #if eleccionLeer.is_file():
                 #print('se puede leer')
                 #cicloValidar1 = False
-            else:
-                #if eleccionLeer == False:
-                print('Error, intente de nuevo')
+            #else:
+            else: 
+                #validar(eleccionLeer) == False:
+                print('Nombre incorrecto, intente de nuevo')
                 #print('error, intenta de nuevo')
-                #break
+                #cicloValidar1 = False
 
     elif opcionMenu == "3":
         print("Ingrese el archivo que desea editar")
