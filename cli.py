@@ -1,148 +1,105 @@
-# poner un def, para acortar codigo..regresar a input de archivo, o menú general
-import os #checar equivalente
+import os
+from os import system
+system("clear")
 import platform
 import shutil
 from pathlib import Path
 
 #Variables utilizadas en todos los ciclos y funciones
-current_directory = Path.cwd()
-path = Path(current_directory) 
-
-##Función para validar existencia de archivos (problema con esta función)
-def validar(nombre_archivo):
-    data = input(nombre_archivo)
-    path_folder = path / data
-    
-    if path_folder.exists():
-        print("ok")
-        return True
-    else:
-        #print('Nombre incorrecto, intente de nuevo')
-        return False
-        #except ValueError:
-        #   print("El dato ")
+directorio_actual = Path.cwd()
+ruta = Path(directorio_actual)
 
 #Función Listar
 def listar():
-    for dir in path.iterdir():
+    for dir in ruta.iterdir():
         if dir.is_file() and dir.suffix == '.txt':
             print(dir.name)
 
 #Función leer
 def leer():
-    path_file2 = path / eleccionLeer
-    #if path_file2.exists():
-        #print("ok)")
-    with open(path_file2, 'r') as file:
-        content = file.read()
-        #content = path_file2.read_text()
-        print(content)
+    with open(ruta_leer, 'r') as file:
+        contenido = file.read()
+        print(contenido)
 
 #Función Editar
 def editar():
-    path_file = path / eleccionFileEd
-    if path_file.exists() and eleccionEditar == "1":
-        with open(path_file, 'w') as file:
+    ruta_editar = ruta / eleccionFileEd
+    if ruta_editar.exists() and eleccionEditar == "1":
+        with open(ruta_editar, 'w') as file:
             file.write(nuevo_tex)
-    elif path_file.exists() and eleccionEditar == "2":
-        with open(path_file, 'a') as file:
+    elif ruta_editar.exists() and eleccionEditar == "2":
+        with open(ruta_editar, 'a') as file:
             file.write(nuevo_tex)
 
 #Función eliminar
 def eliminar():
-    path_file = path / eleccionEliminar
-    path_file.unlink
+    ruta_eliminar = ruta / eleccionEliminar
+    ruta_eliminar.unlink()
 
 
 #Menú principal
-cicloMenu1 = True
-while cicloMenu1:
+Menuppal = True
+while Menuppal:
     print("\nMenú principal")
     print("1. Listar archivos")
     print("2. Leer archivo")
     print("3. Editar archivo")
     print("4. Eliminar archivo")
-    print("5. Limpiar consola") #Se incorporó la sugerencia de añadir esta función de la asesoría #1 sobre un proyecto de este tipo.
-    print("6. Salir")
+    print("5. Salir")
 
 
-    opcionMenu = input("Ingrese una opción con número: ") #validar que sea número
-
+    opcionMenu = input("\nIngrese un número como opción: ") #validar que sea número
+    
 #Cada elección en if else llama a una función
     if opcionMenu == "1":
         listar()
 
     elif opcionMenu == "2":
-        mensajeLeer = "\nElija el archivo que desea leer de la lista: "
-        print(mensajeLeer)
+        print("\nElija el archivo que desea leer de la lista: ")
         listar()
+        eleccionLeer = input("\nSu elección: ") #validar nombre
+        ruta_leer = ruta /eleccionLeer
+        if ruta_leer.exists():
+            leer()
+        else:
+            print('Nombre del archivo incorrecto, intente de nuevo.')
         
         
-        cicloValidar1 = True
-        while cicloValidar1:
-            eleccionLeer = input("su elección: ") #los espacios los acepta pero repite el bucle de preguntar el nombre del archivo
-            #validar(eleccionLeer)
-            #validar nombre
-            if validar(eleccionLeer): #== True:
-                #path_Leer = path / eleccionLeer
-                leer()
-                cicloValidar1 = False
-            #if eleccionLeer.is_file():
-                #print('se puede leer')
-                #cicloValidar1 = False
-            #else:
-            else: 
-                #validar(eleccionLeer) == False:
-                print('Nombre incorrecto, intente de nuevo')
-                #print('error, intenta de nuevo')
-                #cicloValidar1 = False
-
     elif opcionMenu == "3":
         print("Ingrese el archivo que desea editar")
         listar()
+        
         eleccionFileEd = input("\nsu elección: ")
+        ruta_editar = ruta / eleccionFileEd
+        if ruta_editar.exists():
 
 #Se añadió un segundo ciclo While dentro del Ciclo del Menú principal para mostrar las opciones de edición, así como retornar al menú ppal.
-        cicloMenu2 = True
-        while cicloMenu2:
-            mensajeEditar = ("Menú módulo editar \nElija el tipo de edición que desea ejecutar: ")
-            print(mensajeEditar, "\n1. Sobreescribir en el archivo \n2. Añadir texto al final del contenido \n3. Regresar al menú principal")
-            eleccionEditar= input("\nsu elección: ")
+            SubmenuEd = True
+            while SubmenuEd:
+                mensajeEditar = ("\nSubmenú módulo editar \nElija el tipo de edición que desea ejecutar: ")
+                print(mensajeEditar, "\n1. Sobreescribir en el archivo \n2. Añadir texto al final del contenido \n3. Regresar al menú principal")
+                eleccionEditar= input("\n \nSu elección: ")
 
-            if eleccionEditar == "1" or eleccionEditar == "2": 
-                nuevo_tex = input("Escriba el texto a añadir: ")
-                editar()
-                cicloMenu2 = False
-            elif eleccionEditar == "3":
-                cicloMenu2 = False
-            else:
-                print("Selecciona solo números del 1 al 3, intenta de nuevo\n")
-
+                if eleccionEditar == "1" or eleccionEditar == "2": 
+                    nuevo_tex = input("Escriba el texto a añadir: ")
+                    editar()
+                    SubmenuEd = False
+                elif eleccionEditar == "3":
+                    SubmenuEd = False
+                else:
+                    print("Selecciona solo números del 1 al 3, intenta de nuevo\n")
+        
+        else:
+            print("Nombre del archivo, intente de nuevo.")
 
     elif opcionMenu == "4":
-        print("Ingrese el archivo que desea eliminar")
+        print("\nIngrese el archivo que desea eliminar")
         listar()
-        eleccionEliminar = input("\nsu elección: ")
+        eleccionEliminar = input("\nSu elección: ")
         eliminar()
 
     elif opcionMenu == "5":
-        if platform.system() == "Windows":
-            os.system("cls")
-        else:
-            os.system("clear")
-
-    elif opcionMenu == "6":
-        cicloMenu1 = False  
+        Menuppal = False  
 
     else:
         print("Selecciona solo números del 1 al 5, intenta de nuevo\n")
-
-
-
-#añadir .txt a concatenar para eliminar la necesidad de escribirla
-#reconocer nombre del archivo tanto con minúsculas como mayúsculas
-#cambiar menu2 a submenu
-
-
-
-
