@@ -32,7 +32,7 @@ def eliminar():
     ruta_eliminar = ruta / eleccionEliminar
     ruta_eliminar.unlink()
 
-
+print("¡Bienvenidx! Con este programa usted será capaz de manipular \narchivos con extensión .txt desde cualquier directorio \ndonde coloque el programa en comento. Recuerde añadir <.txt> \ndespúes del nombre del archivo cuando el programa solicite tal información.")
 #Menú principal
 Menuppal = True
 while Menuppal:
