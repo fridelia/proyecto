@@ -1,7 +1,3 @@
-import os
-from os import system
-system("clear")
-import platform
 import shutil
 from pathlib import Path
 
