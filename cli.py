@@ -30,7 +30,10 @@ def editar():
 #Función eliminar
 def eliminar():
     ruta_eliminar = ruta / eleccionEliminar
-    ruta_eliminar.unlink()
+    if ruta_eliminar.exists():
+        ruta_eliminar.unlink()
+    else:
+        print("Nombre del archivo incorrecto, intente de nuevo.")
 
 print("¡Bienvenidx! Con este programa usted será capaz de manipular \narchivos con extensión .txt desde cualquier directorio \ndonde coloque el programa en comento. Recuerde añadir <.txt> \ndespúes del nombre del archivo cuando el programa solicite tal información.")
 #Menú principal
@@ -86,7 +89,7 @@ while Menuppal:
                     print("Selecciona solo números del 1 al 3, intenta de nuevo\n")
         
         else:
-            print("Nombre del archivo, intente de nuevo.")
+            print("Nombre del archivo incorrecto, intente de nuevo.")
 
     elif opcionMenu == "4":
         print("\nIngrese el archivo que desea eliminar")
